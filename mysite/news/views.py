@@ -1,8 +1,11 @@
+import asyncio
+
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import redirect, render
 from django.views.generic import CreateView, ListView, DetailView
 
+from news.async_requests import get_news_by_category
 from news.forms import NewsForm, UserRegisterForm, UserLoginForm
 from news.models import News, Category
 from django.contrib import messages
@@ -66,14 +69,13 @@ class NewsByCategory(ListView):
         return context
 
     def get_queryset(self):
-        return News.objects.filter(category_id=self.kwargs['category_id'], is_published=True).select_related('category')
+        coroutine = get_news_by_category(self.kwargs['category_id'])
+        return asyncio.run(coroutine)
 
 
 class ViewNews(DetailView):
     model = News
     context_object_name = 'news_item'
-    # template_name = 'news/news_detail.html'
-    # pk_url_kwarg = 'news_id'
 
 
 class CreateNews(LoginRequiredMixin, CreateView):

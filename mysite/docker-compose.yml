@@ -1,0 +1,26 @@
+version: '3'
+
+services:
+  web:
+    image: liolegal/mysite:1.0.0
+    build: ./web
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/web_django
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+  db:
+    image: mysql:5.7
+    ports:
+      - '3306:3306'
+    environment:
+      MYSQL_DATABASE: 'django'
+      MYSQL_USER: 'admin'
+      MYSQL_PASSWORD: '1234'
+      MYSQL_ROOT_PASSWORD: '1234'
+    restart: always
+    volumes:
+      - ./django:/var/lib/mysql
+
