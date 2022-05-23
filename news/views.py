@@ -1,14 +1,19 @@
 import asyncio
+import logging
 
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
+from django.http import Http404
 from django.shortcuts import redirect, render
-from django.views.generic import CreateView, ListView, DetailView
+from django.urls import reverse_lazy, reverse
+from django.views.generic import CreateView, ListView, DetailView, UpdateView, DeleteView
 
 from news.async_requests import get_news_by_category
 from news.forms import NewsForm, UserRegisterForm, UserLoginForm
 from news.models import News, Category
 from django.contrib import messages
+
+logger = logging.getLogger('django')
 
 def register(request):
     if request.method == 'POST':
@@ -40,6 +45,7 @@ def user_login(request):
 def user_logout(request):
     logout(request)
     return redirect('login')
+
 
 class HomeNews(ListView):
     model = News
@@ -81,10 +87,41 @@ class ViewNews(DetailView):
 class CreateNews(LoginRequiredMixin, CreateView):
     form_class = NewsForm
     template_name = 'news/add_news.html'
-    # success_url = reverse_lazy('home')
-    # login_url = '/admin/'
     raise_exception = True
 
+    def form_valid(self, form):
+        obj = form.save(commit=False)
+        obj.author = self.request.user
+        obj.save()
+        return super(CreateNews, self).form_valid(form)
+
+class UpdateNews(LoginRequiredMixin, UpdateView):
+    model = News
+    form_class = NewsForm
+    template_name = 'news/update_news.html'
+
+    def get_object(self, queryset=None):
+        obj = super(UpdateNews, self).get_object(queryset)
+        if obj.author != self.request.user:
+            messages.error(self.request, "You can't edit this post")
+            logger.error("Attempt to get an access to update function")
+            raise Http404("You don't own this object")
+        return obj
+
+
+class DeleteNews(LoginRequiredMixin, DeleteView):
+    model = News
+    template_name = 'news/delete_news.html'
+    def get_success_url(self):
+        return reverse('home')
+
+    def get_object(self, queryset=None):
+        obj = super(DeleteNews, self).get_object(queryset)
+        if obj.author != self.request.user:
+            messages.error(self.request, "You can't edit this post")
+            logger.error("Attempt to get an access to delete function")
+            raise Http404("You don't own this object")
+        return obj
 
 # def index(request):
 #     news = News.objects.all()

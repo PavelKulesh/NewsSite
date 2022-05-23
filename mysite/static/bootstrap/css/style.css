@@ -1,6 +1,36 @@
 body{
-    background-color: #ccc
+    background-color: #708090
 }
 .navbar-text{
-    margin-left: 1250px;
+    margin-left:auto
+}
+/*.navbar{
+ background-color: #2F4F4F
+}
+.card-body{
+background-color: #708090
+}*/
+.card-header{
+background-color: #F5F5DC
+}
+.card-footer{
+background-color: #F5F5DC
+}
+.navbar-text {
+    margin-left: auto;
+    float: right;
+}
+.btn {
+    color: #fff;
+    background-color: #708090;
+    border-color: #87CEEB;
+}
+a{
+color:#708090;
+}
+.page-link{
+color: #708090;
+}
+.page-link:hover{
+color: #708090;
 }

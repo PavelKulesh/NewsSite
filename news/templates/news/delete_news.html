@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Редактирование новости :: {{ block.super }}
+{% endblock %}
+
+{% block sidebar %}
+{% include 'inc/_sidebar.html' %}
+{% endblock %}
+
+{% block content %}
+<form action="{% url 'delete_news' pk=object.pk%}" method="post">
+    <h1>Удаление новости</h1>
+    <form method="post">{% csrf_token %}
+        <p>Are you sure you want to delete "News " {{ object.title }} "?</p>
+        {{ form }}
+        <input type="submit" value="Подтвердить">
+    </form>
+</form>
+{% endblock %}
