@@ -82,7 +82,8 @@ DATABASES = {
         'PASSWORD': 'password',
         # 'HOST': 'news-site-pro-max-256gb-5g.herokuapp.com',
         # 'HOST': '127.0.0.1',
-        'HOST': 'db',
+        # 'HOST': 'db',
+        'HOST': 'localhost',
         'PORT': '3306',
     },
     'OPTIONS': {
