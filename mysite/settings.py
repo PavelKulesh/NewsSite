@@ -22,9 +22,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-*1-f93fn90w00-f@1joe^dboxcim0hk$_(zny#uo@xdy1yl7_4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1' , 'news-site-pro-max-256gb-5g.herokuapp.com' , '*']
+ALLOWED_HOSTS = ['127.0.0.1', 'news-site-pro-max-256gb-5g.herokuapp.com', '*']
 
 # Application definition
 
@@ -80,8 +80,9 @@ DATABASES = {
         'NAME': 'db_django',
         'USER': 'admin',
         'PASSWORD': 'password',
-        'HOST': 'news-site-pro-max-256gb-5g.herokuapp.com',
-        # 'HOST': '127.0.0.1',
+         #'HOST': 'news-site-pro-max-256gb-5g.herokuapp.com',
+         #'HOST': '127.0.0.1',
+        'HOST': 'db',
         'PORT': '3306',
     }
 }
