@@ -20,7 +20,7 @@ class News(models.Model):
     class Meta:
         verbose_name = 'Новость'
         verbose_name_plural = 'Новости'
-
+        ordering = ['-created_at']
     def get_absolute_url(self):
         return reverse('view_news', kwargs={"pk": self.pk})
 
