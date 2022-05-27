@@ -80,7 +80,7 @@ DATABASES = {
         'NAME': 'db_django',
         'USER': 'admin',
         'PASSWORD': 'password',
-        'HOST': 'db',
+        'HOST': 'news-site-pro-max-256gb-5g.herokuapp.com',
         # 'HOST': '127.0.0.1',
         'PORT': '3306',
     }
