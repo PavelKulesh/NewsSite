@@ -15,6 +15,7 @@ from django.contrib import messages
 
 logger = logging.getLogger('django')
 
+
 def register(request):
     if request.method == 'POST':
         form = UserRegisterForm(request.POST)
@@ -71,7 +72,7 @@ class NewsByCategory(ListView):
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(**kwargs)
-       # context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
+        # context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
         return context
 
     def get_queryset(self):
@@ -95,6 +96,7 @@ class CreateNews(LoginRequiredMixin, CreateView):
         obj.save()
         return super(CreateNews, self).form_valid(form)
 
+
 class UpdateNews(LoginRequiredMixin, UpdateView):
     model = News
     form_class = NewsForm
@@ -112,6 +114,7 @@ class UpdateNews(LoginRequiredMixin, UpdateView):
 class DeleteNews(LoginRequiredMixin, DeleteView):
     model = News
     template_name = 'news/delete_news.html'
+
     def get_success_url(self):
         return reverse('home')
 
@@ -122,39 +125,3 @@ class DeleteNews(LoginRequiredMixin, DeleteView):
             logger.error("Attempt to get an access to delete function")
             raise Http404("You don't own this object")
         return obj
-
-# def index(request):
-#     news = News.objects.all()
-#     categories = Category.objects.all()
-#     context = {
-#         'news': news,
-#         'title': 'Список новостей',
-#         'categories': categories,
-#     }
-#     return render(request, 'news/index.html', context)
-
-
-# def get_category(request, category_id):
-#     news = News.objects.filter(category_id=category_id)
-#     categories = Category.objects.all()
-#     category = Category.objects.get(pk=category_id)
-#     return render(request, 'news/category.html', {'news': news, 'category': category, 'categories': categories})
-
-
-# def view_news(request, news_id):
-#     # news_item = News.objects.get(pk=news_id)
-#     news_item = get_object_or_404(News, pk=news_id)
-#     return render(request, 'news/view_news.html', {"news_item": news_item})
-
-
-# def add_news(request):
-#     if request.method == 'POST':
-#         form = NewsForm(request.POST)
-#         if form.is_valid():
-#             # print(form.cleaned_data)
-#             # news = News.objects.create(**form.cleaned_data)
-#             news = form.save()
-#             return redirect(news)
-#     else:
-#         form = NewsForm()
-#     return render(request, 'news/add_news.html', {'form': form})
