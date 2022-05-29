@@ -49,7 +49,7 @@ class NewsTests(TestCase):
     def test_post_update_view(self):
         response = self.client.post(reverse('update_news', args='7'), {
             'title': 'Updated title',
-            'body': 'Updated text',
+            'content': 'Updated text',
         })
         for post in News.objects.all():
             print(f"---{post.pk}---")

@@ -13,6 +13,8 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
+import dj_database_url
+
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 # Quick-start development settings - unsuitable for production
@@ -73,29 +75,39 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
+    # 'default': {
+    #     # 'ENGINE': 'django.db.backends.sqlite3',
+    #     # 'NAME': BASE_DIR / 'db.sqlite3',
+    #     'ENGINE': 'django.db.backends.mysql',
+    #     # 'NAME': 'db_django',
+    #     'NAME': 'django',
+    #     'USER': 'root',
+    #     'PASSWORD': ' ',
+    #     # 'USER': 'admin',
+    #     # 'PASSWORD': 'password',
+    #     'HOST': '127.0.0.1',
+    #     # 'HOST': 'db',
+    #     # 'HOST': 'localhost',
+    #     'PORT': '3306',
+    # },
+    # 'OPTIONS': {
+    #     'charset': 'utf8mb4',
+    #     'init_command': 'SET character_set_connection=utf8mb4;'
+    #                     'SET collation_connection=utf8mb4_unicode_ci;'
+    #                     "SET NAMES 'utf8mb4';"
+    #                     "SET CHARACTER SET utf8mb4;"
+    # },
     'default': {
-        # 'ENGINE': 'django.db.backends.sqlite3',
-        # 'NAME': BASE_DIR / 'db.sqlite3',
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'django',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'demo_test',
         'USER': 'root',
-        # 'PASSWORD': 'password',
-        'PASSWORD': ' ',
-        # 'HOST': 'news-site-pro-max-256gb-5g.herokuapp.com',
-        'HOST': '127.0.0.1',
-        # 'HOST': 'db',
-        # 'HOST': 'localhost',
-        'PORT': '3306',
-    },
-    'OPTIONS': {
-        'charset': 'utf8mb4',
-        'init_command': 'SET character_set_connection=utf8mb4;'
-                        'SET collation_connection=utf8mb4_unicode_ci;'
-                        "SET NAMES 'utf8mb4';"
-                        "SET CHARACTER SET utf8mb4;"
-    },
+        'PASSWORD': 'password1234',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
 }
-
+db_from_env = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(db_from_env)
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
 

@@ -14,7 +14,7 @@
     <div class="card-header">
         Категория: <a href="{{ item.category.get_absolute_url }}">{{ item.category }}</a>
         <span class="navbar-text">
-            {% if request.user.is_authenticated %}
+            {% if request.user.is_authenticated and user.pk == item.author.id %}
 
 
                     <a href="{% url 'update_news' pk=item.pk%}">Edit</a>   | <a href="{% url 'delete_news' pk=item.pk%}">Delete</a>

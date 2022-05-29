@@ -6,9 +6,7 @@ services:
     build: ./web
     environment:
       - DJANGO_SUPERUSER_PASSWORD=1234
-    command: bash -c "
-      python manage.py createsuperuser && 
-      python manage.py runserver 0.0.0.0:8000"
+    command:  python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/web_django
     ports:
