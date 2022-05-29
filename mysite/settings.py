@@ -11,8 +11,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 """
 import os
 from pathlib import Path
-from dotenv import load_dotenv
-load_dotenv()
+# from dotenv import load_dotenv
+# load_dotenv()
 
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = str(os.getenv('SECRET_KEY'))
+SECRET_KEY = 'django-insecure-*1-f93fn90w00-f@1joe^dboxcim0hk$_(zny#uo@xdy1yl7_4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -78,35 +78,13 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     # 'ENGINE': 'django.db.backends.sqlite3',
-    #     # 'NAME': BASE_DIR / 'db.sqlite3',
-    #     'ENGINE': 'django.db.backends.mysql',
-    #     # 'NAME': 'db_django',
-    #     'NAME': 'django',
-    #     'USER': 'root',
-    #     'PASSWORD': ' ',
-    #     # 'USER': 'admin',
-    #     # 'PASSWORD': 'password',
-    #     'HOST': '127.0.0.1',
-    #     # 'HOST': 'db',
-    #     # 'HOST': 'localhost',
-    #     'PORT': '3306',
-    # },
-    # 'OPTIONS': {
-    #     'charset': 'utf8mb4',
-    #     'init_command': 'SET character_set_connection=utf8mb4;'
-    #                     'SET collation_connection=utf8mb4_unicode_ci;'
-    #                     "SET NAMES 'utf8mb4';"
-    #                     "SET CHARACTER SET utf8mb4;"
-    # },
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'demo_test',
-        'USER': 'root',
-        'PASSWORD': 'password1234',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get('POSTGRES_NAME', 'demo_test'),
+        'USER': os.environ.get('POSTGRES_USER', 'root'),
+        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', 'password1234'),
+        'HOST': os.environ.get('POSTGRES_DB', 'localhost'),
+        'PORT': os.environ.get('POSTGRES_PORT', '5432')
     }
 }
 db_from_env = dj_database_url.config(conn_max_age=600)
