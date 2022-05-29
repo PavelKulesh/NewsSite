@@ -1,5 +1,6 @@
 import asyncio
 import logging
+from typing import Dict, Any
 
 from django.contrib.auth import login, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -55,7 +56,7 @@ class HomeNews(ListView):
     context_object_name = 'news'
     paginate_by = 2
 
-    def get_queryset(self):
+    def get_queryset(self)->Any:
         return News.objects.filter(is_published=True).select_related('category')
 
 
@@ -65,7 +66,7 @@ class NewsByCategory(ListView):
     context_object_name = 'news'
     paginate_by = 2
 
-    def get_context_data(self, *, object_list=None, **kwargs):
+    def get_context_data(self, *, object_list=None, **kwargs)-> Dict[str,Any] :
         context = super().get_context_data(**kwargs)
         context['title'] = Category.objects.get(pk=self.kwargs['category_id'])
         return context
