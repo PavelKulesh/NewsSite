@@ -10,7 +10,6 @@ db.sqlite3
 /venv
 # Backup files #
 *.bak
-__pycache__
 .coverage
 # If you are using PyCharm #
 # User-specific stuff
