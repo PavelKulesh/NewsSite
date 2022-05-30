@@ -1,5 +1,5 @@
 body{
-     background:  url("https://kartinkin.net/uploads/posts/2021-07/1627171146_10-kartinkin-com-p-amerikanskaya-gazeta-fon-krasivo-11.jpg") center no-repeat fixed;width: 100%;
+     background:  url("https://static.vecteezy.com/system/resources/thumbnails/002/019/453/original/news-background-in-grey-free-video.jpg") center no-repeat fixed;width: 100%;
 
 }
 .title span {
@@ -11,33 +11,49 @@ body{
 	line-height: 14px;
 	font-size: 45px;
 }
-
-.navbar-text{
+.navbar-text {
+    float: right;
     margin-left:auto
 }
-
 .card-header{
-background-color: #F5F5DC
+background-color: #cfcfcf
 }
 .card-footer{
-background-color: #F5F5DC
+background-color: #cfcfcf
 }
-.navbar-text {
-    margin-left: auto;
-    float: right;
+a {
+    color: #0b0b0c;
+    text-decoration: underline;
 }
-.btn {
-    color: #fff;
-    background-color: #708090;
-    border-color: #87CEEB;
+.btn-primary {
+    color: #0b0b0c;
+    background-color: #cfcfcf;
+    border-color: #0b0b0c;
 }
-a{
-color:#708090;
+.text-muted {
+    --bs-text-opacity: 1;
+    color: #0b0b0c!important;
+}
+.page-item.active .page-link {
+    z-index: 3;
+    color: #0b0b0c;
+    background-color: #cfcfcf;
+    border-color: #0b0b0c;
 }
 .page-link{
-color: #708090;
-}
-.page-link:hover{
-color: #708090;
+    color: #0b0b0c;
+    background-color: #fff;
+    border-color: #0b0b0c;
 }
 
+.page-link:hover {
+    z-index: 2;
+    color: #0b0b0c;
+    background-color: #cfcfcf;
+    border-color: #0b0b0c;
+}
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+     color: #0b0b0c;
+}
